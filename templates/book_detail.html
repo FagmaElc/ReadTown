@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ book.title }} — Детали{% endblock %}
+{% block content %}
+<h1>{{ book.title }}</h1>
+<p><strong>Автор:</strong> {{ book.author }}</p>
+<img src="{{ book.image }}" alt="Обложка {{ book.title }}" style="max-width:500px;">
+<p class="text-success fw-bold">
+<strong>Цена: {{ book.price }} ₽ </strong>  
+  <span style="color: red; text-decoration: line-through; margin-left: 10px;">
+    {{ (book.price * 1.5) | round(2) }} ₽
+  </span>
+<h3>Описание</h3>
+<p>{{ book.full_desc }}</p>
+<p><strong>Страницы:</strong> {{ book.pages }}, <strong>Год:</strong> {{ book.year }}</p>
+<p><strong>Жанр:</strong> {{ book.genre }}</p>
+<p><strong>Издательство:</strong> {{ book.publisher }}</p>
+<a href="{{ url_for('home') }}">Назад</a>
+{% endblock %}

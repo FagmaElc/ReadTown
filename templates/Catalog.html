@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная — Книжный магазин{% endblock %}
+
+{% block content %}
+<h1>Каталог</h1>
+<div id="bookCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://www.mirf.ru/backend/wp-content/uploads/2022/01/325d89effaa687f332aaaebfdcf34644.jpg" class="d-block w-100" alt="Новинка 1">
+    </div>
+    <div class="carousel-item">
+      <img src="https://www.mirf.ru/backend/wp-content/uploads/2019/04/6f79d96360829a1ae4f7d662be4c8d6f.jpg" class="d-block w-100" alt="Новинка 2">
+    </div>
+    <div class="carousel-item">
+      <img src="https://blog.yakaboo.ua/wp-content/uploads/2017/03/IMG_2258-792x509.jpg" class="d-block w-100" alt="Новинка 3">
+    </div>
+  </div>
+
+  <!-- Стрелки переключения -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+    <span class="visually-hidden">Предыдущий</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+    <span class="visually-hidden">Следующий</span>
+  </button>
+</div>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Список книг</h1>
+
+    <div class="row">
+  {% for book in books %}
+  <div class="col-md-4 mb-4">
+    <div class="card h-100">
+      <img src="{{ book.image }}" class="card-img-top" alt="Обложка">
+      <div class="card-body">
+        <h5 class="card-title">{{ book.title }}</h5>
+        <p class="card-text">Автор: {{ book.author }}</p>
+        <p class="text-success fw-bold">
+  Цена: {{ book.price }} ₽ 
+  <span style="color: red; text-decoration: line-through; margin-left: 10px;">
+    {{ (book.price * 1.5) | round(2) }} ₽
+  </span>
+</p>
+        <a href="{{ url_for('book_detail', book_id=book.id) }}" class="btn btn-primary">Добавить в корзину</a>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <p>Книг нет в списке.</p>
+  {% endfor %}
+</div>
+{% endblock %}
